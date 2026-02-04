@@ -84,3 +84,47 @@ function refreshBanner() {
   banner.src = "";
   banner.src = src;
 }
+/* Love Snow Effect */
+
+const snowContainer = document.querySelector(".love-snow");
+
+function createSnowHeart() {
+  const heart = document.createElement("div");
+  heart.classList.add("snow-heart");
+
+  // Romantic symbols
+  const hearts = ["❤️", "💖", "💗", "💕", "💘", "💝"];
+  heart.innerText = hearts[Math.floor(Math.random() * hearts.length)];
+
+  // Random positions & size
+  heart.style.left = Math.random() * 100 + "vw";
+  heart.style.fontSize = Math.random() * 15 + 15 + "px";
+
+  // Slow falling (snow-like)
+  heart.style.animationDuration = Math.random() * 5 + 6 + "s";
+
+  // Slight horizontal drift
+  heart.style.animationDelay = Math.random() * 3 + "s";
+
+  snowContainer.appendChild(heart);
+
+  // Remove after fall
+  setTimeout(() => {
+    heart.remove();
+  }, 12000);
+}
+
+// Continuous snow
+setInterval(createSnowHeart, 250);
+const music = document.getElementById("bg-music");
+
+function enableMusic() {
+  music.volume = 0.5;
+  music.play();
+
+  // Remove listener after first play
+  document.removeEventListener("click", enableMusic);
+}
+
+// Play on first user interaction
+document.addEventListener("click", enableMusic);
